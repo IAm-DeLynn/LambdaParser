@@ -81,10 +81,12 @@ class Parser {
     
     appl.expr1 = parseAtom();
     
-    try {
-      appl.expr2 = parseExpr();
-    } catch(RuntimeException e) {
-      appl.expr2 = null;
+    while(true) {
+      try {
+        appl = new Appl(appl, parseAtom());
+      } catch(RuntimeException e) {
+        break;
+      }
     }
     
     return appl;
